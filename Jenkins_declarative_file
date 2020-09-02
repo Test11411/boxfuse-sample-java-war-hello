@@ -16,5 +16,14 @@ pipeline{
 		    sh "mv target/*.war target/boxfuse-sample-java-war-hello.war"
                 }
             }
-        }
-    }
+	    stage("Deploy to Tomcat_node"){
+		steps{
+		    sshagent(['Tomcat1']) {
+    			sh 'scp -o StrictHostKeyChecking=no  target/boxfuse-sample-java-war-hello.war ec2-user@172.31.45.35:/media/tomcat8/webapps/'
+			sh 'ssh ec2-user@172.31.45.35 /media/tomcat8/bin/startup.sh'
+			sh 'ssh ec2-user@172.31.45.35 /media/tomcat8/bin/shutdown.sh'
+		    }
+        	}
+    	   }
+	}
+}
