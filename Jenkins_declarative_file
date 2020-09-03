@@ -9,7 +9,7 @@ pipeline{
             stage("Git Checkout /media/maven-3.6/bin"){
                 steps{
                     git credentialsId: 'Git_credentials', url: 'https://github.com/Test11411/boxfuse-sample-java-war-hello'
-		            echo "Git checkout is successful"
+		    echo "Git checkout is successful .."
                 }
             }
             stage("Maven Build"){
